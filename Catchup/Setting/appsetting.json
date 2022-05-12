@@ -1,0 +1,23 @@
+{
+	"exclude": [
+		"**/bin",
+		"**/bower_components",
+		"**/jspm_packages",
+		"**/node_modules",
+		"**/obj",
+		"**/platforms"
+	],
+
+	"Logging": {
+		"LogLevel": {
+			"Default": "Information",
+			"Microsoft.AspNetCore": "Warning"
+		}
+	},
+	"AllowedHosts": "*",
+	"MongoDB": {
+		"ConnectionURI": "ATLAS_URI_HERE",
+		"DatabaseName": "sample_mflix",
+		"CollectionName": "playlist"
+	}
+}
