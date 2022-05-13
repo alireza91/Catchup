@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Catchup/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Catchup.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Catchup.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Catchup/1.0.0": {
+      "type": "project",
+      "path": "../Catchup/Catchup.csproj",
+      "msbuildProject": "../Catchup/Catchup.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Catchup >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Alireza\\.nuget\\packages\\": {},
@@ -14,11 +33,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Catchup\\Catchup\\Catchup\\Catchup.csproj",
-      "projectName": "Catchup",
-      "projectPath": "D:\\Work\\Catchup\\Catchup\\Catchup\\Catchup.csproj",
+      "projectUniqueName": "D:\\Work\\Catchup\\Catchup\\Infrastructure\\Infrastructure.csproj",
+      "projectName": "Infrastructure",
+      "projectPath": "D:\\Work\\Catchup\\Catchup\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Alireza\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Catchup\\Catchup\\Catchup\\obj\\",
+      "outputPath": "D:\\Work\\Catchup\\Catchup\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -38,7 +57,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Work\\Catchup\\Catchup\\Catchup\\Catchup.csproj": {
+              "projectPath": "D:\\Work\\Catchup\\Catchup\\Catchup\\Catchup.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

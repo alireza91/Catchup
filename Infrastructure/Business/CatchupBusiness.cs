@@ -1,6 +1,8 @@
-﻿namespace Catchup
+﻿using Catchup.Contracts;
+
+namespace Infrastructure
 {
-	public class CatchupBusiness
+	public class CatchupBusiness : ICatchupBusiness
 	{
 		private readonly string[] _singleDigits = { "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه" };
 		private readonly int[] _singleDigitsMatch = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
