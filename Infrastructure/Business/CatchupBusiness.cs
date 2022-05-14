@@ -5,7 +5,7 @@ namespace Infrastructure
 	public class CatchupBusiness : ICatchupBusiness
 	{
 		private readonly string[] _singleDigits = { "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه" };
-		private readonly int[] _singleDigitsMatch = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		//private readonly int[] _singleDigitsMatch = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		private readonly string[] _twoDigits = { "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود" };
 		private readonly int[] _twoDigitsMatch = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30, 40, 50, 60, 70, 80, 90 };
 		private readonly string[] _threeDigits = { "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد" };
@@ -47,17 +47,17 @@ namespace Infrastructure
 				return "-1111";
 			}
 
-		} 
+		}
 
 		private int FindNumberMatch(int thousand, int hundred, int dec, int single)
 		{
-			int forth = int.Parse(_singleDigitsMatch[thousand].ToString() + "000");
+			int forth = int.Parse((thousand + 1).ToString() + "000");
 			//int third = _threeDigitsMatch[hundred];
 			int third = (hundred + 1) * 100;
 			int second = _twoDigitsMatch[dec];
 			int first = 0;
 			if (single > -1)
-				first = _singleDigitsMatch[single];
+				first = single + 1;
 
 			return first + second + third + forth;
 		}
