@@ -48,8 +48,6 @@ namespace Infrastructure
 			}
 
 		} 
-		// 3475-1114 // dabirkhune
-		// 3475-1109, 1110
 
 		private int FindNumberMatch(int thousand, int hundred, int dec, int single)
 		{
