@@ -6,7 +6,7 @@ Catchup produces a random 4 digits number in words as a string to be read by hum
 Users must enter the exact match of the number generated to become validated as a non-robotic user.
 
 ## Setup
-I recommend to inject the interface "ICaptcha" as a dependency so you can access the methods and use them inside your "business layer".
+I recommend to inject the interface "ICaptcha" as a dependency so you can access the methods and use them inside your "Business layer".
 
 ## How it works
 # Get a captcha as string
