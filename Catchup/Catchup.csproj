@@ -4,7 +4,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Authors>Alireza Mortezaei</Authors>
 		<Description>
 			A simple captcha generator and validator for Persians.
@@ -17,6 +17,7 @@
 		<RepositoryUrl>https://github.com/alireza91/Catchup.git</RepositoryUrl>
 		<PackageTags>Asp.net Core; C#; Captcha; Persian;</PackageTags>
 		<PackageReleaseNotes>Please feel free to contribute</PackageReleaseNotes>
+		<Version>1.1.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
