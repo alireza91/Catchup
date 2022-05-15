@@ -9,9 +9,23 @@ Users must enter the exact match of the number generated to become validated as 
 I recommend to inject the interface "ICaptcha" as a dependency so you can access the methods use them inside your "business layer".
 
 ## How it works
-# Get a captcha
+# Get a captcha as string
 * To get a generated random captcha, use GetACaptcha() method.
 This method takes no argument and return a string which contains 4 digits number in words as a captcha riddle.
+
+# Get a captcha in image with Bitmap format
+* To get a generated random captcha image, use GetAnImageCaptchaInBitmapFormat() method.
+This method returns an object from Bitmap class in C#.
+
+# Get a captcha in image as byte array
+* To get a generated random captcha image, use GetAnImageCaptchaInByteArray() method.
+This method returns an byte array which you can use directly in <img /> tag.
+
+* Example in html page:
+<img style="width:500px;" src="data:image/png;base64, imageInByteArray)" />
+
+* Example in razor pages:
+<img style="width:500px;" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(imageInByteArray))" />
 
 # Solve the captcha
 * To validate user as a non-robotic one, use CheckCaptcha(string riddle, string solution).
