@@ -1,15 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Authors>Alireza Mortezaei</Authors>
-    <Description>A simple captcha generator and validator for Persians.
-This package generate a string which represenet a 4 digit numbers in words. 
-User should send the exact match as number to validate himself as a non-robotic user</Description>
-    <Copyright>© 2020 Alireza Mortezaei &lt;alireza_mortezaei@hotmail.com&gt;</Copyright>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>Alireza Mortezaei</Authors>
+		<Description>
+			A simple captcha generator and validator for Persians.
+			This package generate a string which represenet a 4 digit numbers in words.
+			User should send the exact match as number to validate himself as a non-robotic user
+		</Description>
+		<Copyright>© 2020 Alireza Mortezaei &lt;alireza_mortezaei@hotmail.com&gt;</Copyright>
+		<PackageProjectUrl>https://github.com/alireza91/Catchup</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/alireza91/Catchup.git</RepositoryUrl>
+		<PackageTags>Asp.net Core; C#; Captcha; Persian;</PackageTags>
+		<PackageReleaseNotes>Please feel free to contribute</PackageReleaseNotes>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+	</ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Alireza Mortezaei")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("© 2020 Alireza Mortezaei <alireza_mortezaei@hotmail.com>")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("\r\n\t\t\tA simple captcha generator and validator for Persians.\r\n\t\t\tThis package gene" +
     "rate a string which represenet a 4 digit numbers in words.\r\n\t\t\tUser should send " +
