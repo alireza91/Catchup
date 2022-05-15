@@ -11,8 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Catchup")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Alireza Mortezaei")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("© 2020 Alireza Mortezaei <alireza_mortezaei@hotmail.com>")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("A simple captcha generator and validator for Persians.\r\nThis package generate a s" +
+    "tring which represenet a 4 digit numbers in words. \r\nUser should send the exact " +
+    "match as number to validate himself as a non-robotic user")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Catchup")]
