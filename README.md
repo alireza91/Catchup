@@ -23,7 +23,7 @@ This method returns an byte array which you can use directly in <img /> tag.
 
 ## Examples in UI
 * Example in html page:
--> \<img style="width:500px;" src="data:image/png;base64, " + imageInByteArray" />
+-> \<img style="width:500px;" src='data:image/png;base64, ' + imageInByteArray" />
 
 * Example in razor pages:
 -> <img style="width:500px;" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(imageInByteArray))" />"
