@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\Work\\Catchup\\Catchup\\Catchup\\Catchup.csproj": {
-      "version": "1.0.0",
+      "version": "1.1.0",
       "restore": {
         "projectUniqueName": "D:\\Work\\Catchup\\Catchup\\Catchup\\Catchup.csproj",
         "projectName": "Catchup",
@@ -43,6 +43,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
