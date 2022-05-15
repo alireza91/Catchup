@@ -22,7 +22,7 @@ This method returns an object from Bitmap class in C#.
 This method returns an byte array which you can use directly in <img /> tag.
 
 ## Examples in UI
-* Example in html page:
+* Example in html pages:
 -> \<img style="width:500px;" src='data:image/png;base64, ' + imageInByteArray" />
 
 * Example in razor pages:
