@@ -15,7 +15,7 @@ public class Catchup : ICatchup
 	private readonly Random _random = new();
 	private readonly short _width = 400;
 	private readonly short _height = 100;
-	private StringBuilder sb = new StringBuilder();
+	private readonly StringBuilder sb = new();
 
 	public string GetACaptcha()
 	{
