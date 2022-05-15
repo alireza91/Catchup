@@ -18,7 +18,7 @@ public class Catchup : ICatchup
 		int singleForThousand = _random.Next(_singleDigits.Length);
 		var result = _singleDigits[singleForThousand] + " هزار و " + _threeDigits[three] + " و " + _twoDigits[two] + (two < 10 ? "" : $" و {_singleDigits[single]}");
 		return result;
-	}
+	} 
 
 	public bool CheckCaptcha(string riddle, string solution) =>
 		Analyze(riddle).Equals(solution);
