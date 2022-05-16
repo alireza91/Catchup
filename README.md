@@ -15,14 +15,15 @@ This method takes no argument and return a string which contains 4 digits number
 
 ## Get a captcha in image with Bitmap format
 * To get a generated random captcha image, use GetAnImageCaptchaInBitmapFormat() method.
-This method returns an object from Bitmap and the captcha string class in C#.
+This method returns an object from Bitmap class and the captcha string in C#.
 
 ## Get a captcha in image as byte array
 * To get a generated random captcha image, use GetAnImageCaptchaInByteArray() method.
-This method returns an object which a byte array that you can use directly in <img /> tag and a captcha string.
+This method returns an object which contains a byte array that you can use directly in <img /> tag and a captcha string.
 
-* Example in html page:
--> \<img style="width:500px;" src="data:image/png;base64, imageInByteArray)" />
+## Examples in UI
+* Example in html pages:
+-> \<img style="width:500px;" src='data:image/png;base64, ' + imageInByteArray" />
 
 * Example in razor pages:
 -> <img style="width:500px;" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(imageInByteArray))" />"
