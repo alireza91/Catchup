@@ -1,4 +1,5 @@
 ﻿using Catchup.Contracts;
+using Catchup.Models;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -8,7 +9,7 @@ namespace Catchup;
 public class Catchup : ICatchup
 {
 	#region [Field(s)]
-	
+
 	private readonly string[] _singleDigits = { "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه" };
 	private readonly string[] _twoDigits = { "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود" };
 	private readonly string[] _threeDigits = { "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد" };
@@ -28,18 +29,26 @@ public class Catchup : ICatchup
 		return GenerateRandomCaptcha();
 	}
 
-	public Bitmap GetAnImageCaptchaInBitmapFormat()
+	public BitmapResultModel GetAnImageCaptchaInBitmapFormat()
 	{
 		string generatedCaptchaString = GenerateRandomCaptcha();
-		return MakeCaptchaImage(generatedCaptchaString);
+		return new BitmapResultModel 
+		{ 
+			BitmapImage = MakeCaptchaImage(generatedCaptchaString),
+			GeneratedCaptcha = generatedCaptchaString 
+		};
 	}
 
-	public byte[] GetAnImageCaptchaInByteArray()
+	public ByteArrayResultModel GetAnImageCaptchaInByteArray()
 	{
 		string generatedCaptchaString = GenerateRandomCaptcha();
 		var image = MakeCaptchaImage(generatedCaptchaString);
-		ImageConverter converter = new ImageConverter();
-		return (byte[])converter.ConvertTo(image, typeof(byte[]));
+		ImageConverter? converter = new();
+		return new ByteArrayResultModel
+		{
+			Image = (byte[]?)converter.ConvertTo(image, typeof(byte[])),
+			GeneratedCaptcha = generatedCaptchaString
+		};
 	}
 
 	public bool CheckCaptcha(string riddle, string solution) =>
@@ -102,23 +111,16 @@ public class Catchup : ICatchup
 
 	private Bitmap MakeCaptchaImage(string riddleString)
 	{
-		//First declare a bitmap and declare graphic from this bitmap
 		Bitmap bitmap = new Bitmap(_width, _height, PixelFormat.Format32bppArgb);
 		Graphics g = Graphics.FromImage(bitmap);
-		//And create a rectangle to delegete this image graphic 
 		Rectangle rect = new Rectangle(0, 0, _width, _height);
-		//And create a brush to make some drawings
 		HatchBrush hatchBrush = new HatchBrush(HatchStyle.DottedGrid, Color.Aqua, Color.White);
 		g.FillRectangle(hatchBrush, rect);
 
-		//here we make the text configurations
 		GraphicsPath graphicPath = new GraphicsPath();
-		//add this string to image with the rectangle delegate
 		graphicPath.AddString(riddleString, FontFamily.GenericMonospace, (int)FontStyle.Bold, 80, rect, null);
-		//And the brush that you will write the text
 		hatchBrush = new HatchBrush(HatchStyle.Percent20, Color.Black, Color.DarkOliveGreen);
 		g.FillPath(hatchBrush, graphicPath);
-		//We are adding the dots to the image
 		for (int i = 0; i < (int)(rect.Width * rect.Height / 50F); i++)
 		{
 			int x = _random.Next(_width);
@@ -127,10 +129,8 @@ public class Catchup : ICatchup
 			int h = _random.Next(10);
 			g.FillEllipse(hatchBrush, x, y, w, h);
 		}
-		//Remove all of variables from the memory to save resource
 		hatchBrush.Dispose();
 		g.Dispose();
-		//return the image to the related component
 		return bitmap;
 	}
 
