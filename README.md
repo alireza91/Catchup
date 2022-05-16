@@ -19,7 +19,7 @@ This method returns an object from Bitmap and the captcha string class in C#.
 
 ## Get a captcha in image as byte array
 * To get a generated random captcha image, use GetAnImageCaptchaInByteArray() method.
-This method returns an object which a byte array that you can use directly in <img /> tag and a captcha string.
+This method returns an object which contains a byte array that you can use directly in <img /> tag and a captcha string.
 
 * Example in html page:
 -> \<img style="width:500px;" src="data:image/png;base64, imageInByteArray)" />
