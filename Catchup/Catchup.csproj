@@ -4,20 +4,20 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Authors>Alireza Mortezaei</Authors>
 		<Description>
 			A simple captcha generator and validator for Persians.
 			This package generate a string which represenet a 4 digit numbers in words.
 			User should send the exact match as number to validate himself as a non-robotic user
 		</Description>
-		<Copyright>© 2020 Alireza Mortezaei &lt;alireza_mortezaei@hotmail.com&gt;</Copyright>
+		<Copyright>© 2022 Alireza Mortezaei &lt;alireza_mortezaei@hotmail.com&gt;</Copyright>
 		<PackageProjectUrl>https://github.com/alireza91/Catchup</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/alireza91/Catchup.git</RepositoryUrl>
 		<PackageTags>Asp.net Core; C#; Captcha; Persian;</PackageTags>
 		<PackageReleaseNotes>Please feel free to contribute</PackageReleaseNotes>
-		<Version>1.2.0</Version>
+		<Version>1.3.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
