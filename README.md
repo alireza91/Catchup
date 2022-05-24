@@ -13,10 +13,6 @@ I recommend to inject the interface "ICatchup" as a dependency so you can access
 * To get a generated random captcha, use GetACaptcha() method.
 This method takes no argument and return a string which contains 4 digits number in words as a captcha riddle.
 
-## Get a captcha in image with Bitmap format
-* To get a generated random captcha image, use GetAnImageCaptchaInBitmapFormat() method.
-This method returns an object from Bitmap class and the captcha string in C#.
-
 ## Get a captcha in image as byte array
 * To get a generated random captcha image, use GetAnImageCaptchaInByteArray() method.
 This method returns an object which contains a captcha string and a byte array that you can use directly in image tag.
