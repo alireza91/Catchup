@@ -1,8 +1,10 @@
 ﻿using Catchup.Contracts;
 using Catchup.Models;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
+using SkiaSharp;
+using SkiaSharp.HarfBuzz;
+//using System.Drawing;
+//using System.Drawing.Drawing2D;
+//using System.Drawing.Imaging;
 using System.Text;
 
 namespace Catchup;
@@ -15,9 +17,13 @@ public class Catchup : ICatchup
 	private readonly string[] _threeDigits = { "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد" };
 
 	private readonly short[] _twoDigitsMatch = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30, 40, 50, 60, 70, 80, 90 };
+
 	private readonly Random _random = new();
-	private readonly short _width = 1400;
-	private readonly short _height = 100;
+	private const short _width = 300;
+	private const short _height = 50;
+	private const double _noisePointPercentage = 0.3;
+	private const short _fontSize = 24;
+
 	private readonly StringBuilder _sb = new();
 
 	#endregion
@@ -29,24 +35,23 @@ public class Catchup : ICatchup
 		return GenerateRandomCaptcha();
 	}
 
-	public BitmapResultModel GetAnImageCaptchaInBitmapFormat()
-	{
-		string generatedCaptchaString = GenerateRandomCaptcha();
-		return new BitmapResultModel 
-		{ 
-			BitmapImage = MakeCaptchaImage(generatedCaptchaString),
-			GeneratedCaptcha = generatedCaptchaString 
-		};
-	}
+	//public BitmapResultModel GetAnImageCaptchaInBitmapFormat()
+	//{
+	//	string generatedCaptchaString = GenerateRandomCaptcha();
+	//	return new BitmapResultModel
+	//	{
+	//		BitmapImage = MakeCaptchaImage(generatedCaptchaString),
+	//		GeneratedCaptcha = generatedCaptchaString
+	//	};
+	//}
 
 	public ByteArrayResultModel GetAnImageCaptchaInByteArray()
 	{
 		string generatedCaptchaString = GenerateRandomCaptcha();
 		var image = MakeCaptchaImage(generatedCaptchaString);
-		ImageConverter? converter = new();
 		return new ByteArrayResultModel
 		{
-			Image = (byte[]?)converter.ConvertTo(image, typeof(byte[])),
+			Image = image,
 			GeneratedCaptcha = generatedCaptchaString
 		};
 	}
@@ -109,29 +114,76 @@ public class Catchup : ICatchup
 		return first + second + third + forth;
 	}
 
-	private Bitmap MakeCaptchaImage(string riddleString)
-	{
-		Bitmap bitmap = new Bitmap(_width, _height, PixelFormat.Format32bppArgb);
-		Graphics g = Graphics.FromImage(bitmap);
-		Rectangle rect = new Rectangle(0, 0, _width, _height);
-		HatchBrush hatchBrush = new HatchBrush(HatchStyle.DottedGrid, Color.Aqua, Color.White);
-		g.FillRectangle(hatchBrush, rect);
+	//private Bitmap MakeImageIfOsIsWindows(string riddleString)
+	//{
+	//	Bitmap bitmap = new Bitmap(_width, _height, PixelFormat.Format32bppArgb);
+	//	Graphics g = Graphics.FromImage(bitmap);
+	//	Rectangle rect = new Rectangle(0, 0, _width, _height);
+	//	HatchBrush hatchBrush = new HatchBrush(HatchStyle.DottedGrid, Color.Aqua, Color.White);
+	//	g.FillRectangle(hatchBrush, rect);
 
-		GraphicsPath graphicPath = new GraphicsPath();
-		graphicPath.AddString(riddleString, FontFamily.GenericMonospace, (int)FontStyle.Bold, 80, rect, null);
-		hatchBrush = new HatchBrush(HatchStyle.Percent20, Color.Black, Color.DarkOliveGreen);
-		g.FillPath(hatchBrush, graphicPath);
-		for (int i = 0; i < (int)(rect.Width * rect.Height / 50F); i++)
+	//	GraphicsPath graphicPath = new GraphicsPath();
+	//	graphicPath.AddString(riddleString, FontFamily.GenericMonospace, (int)FontStyle.Bold, 80, rect, null);
+	//	hatchBrush = new HatchBrush(HatchStyle.Percent20, Color.Black, Color.DarkOliveGreen);
+	//	g.FillPath(hatchBrush, graphicPath);
+	//	for (int i = 0; i < (int)(rect.Width * rect.Height / 50F); i++)
+	//	{
+	//		int x = _random.Next(_width);
+	//		int y = _random.Next(_height);
+	//		int w = _random.Next(10);
+	//		int h = _random.Next(10);
+	//		g.FillEllipse(hatchBrush, x, y, w, h);
+	//	}
+	//	hatchBrush.Dispose();
+	//	g.Dispose();
+	//	return bitmap;
+	//}
+
+	private byte[] MakeCaptchaImage(string riddleString)
+	{
+		SKImageInfo imageInfo = new SKImageInfo(_width, _height, SKColorType.Bgra8888);
+		using (var surface = SKSurface.Create(imageInfo))
 		{
-			int x = _random.Next(_width);
-			int y = _random.Next(_height);
-			int w = _random.Next(10);
-			int h = _random.Next(10);
-			g.FillEllipse(hatchBrush, x, y, w, h);
+			var canvas = surface.Canvas;
+			canvas.Clear(SKColors.Beige);
+			using (SKPaint paint = new() { TextSize = _fontSize })
+			{
+				paint.Typeface = SKTypeface.FromFamilyName("Arial");
+				paint.Color = SKColors.DarkMagenta;
+				using (var tf = SKFontManager.Default.MatchCharacter('?'))
+				{
+					using (var shaper = new SKShaper(tf))
+					{
+						var x = _width - paint.MeasureText(riddleString);
+						var y = ((_height - paint.TextSize) / 3) + paint.TextSize;
+						canvas.DrawShapedText(riddleString, new SKPoint(x, y), paint);
+					}
+
+					var noisePointMap = NoiseGenerator();
+					for (var i = 0; i < noisePointMap.Count(); i++)
+					{
+						var noisePointPos = noisePointMap.ElementAt(i);
+						canvas.DrawPoint(noisePointPos.Item1, noisePointPos.Item2, SKColors.DarkRed);
+					}
+				}
+			}
+			SKImage image = surface.Snapshot();
+			return image.Encode(SKEncodedImageFormat.Png, 50).ToArray();
 		}
-		hatchBrush.Dispose();
-		g.Dispose();
-		return bitmap;
+	}
+
+	private (int, int)[] NoiseGenerator()
+	{
+		var noisePointCount = (int)(_width * _height * _noisePointPercentage);
+		var noisePointPosList = Enumerable.Range(0, noisePointCount)
+			.Select(
+				x =>
+					(
+						_random.Next(_width),
+						_random.Next(_height)
+					)
+			).ToArray();
+		return noisePointPosList;
 	}
 
 	#endregion
