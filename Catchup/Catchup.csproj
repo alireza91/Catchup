@@ -7,17 +7,17 @@
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Authors>Alireza Mortezaei</Authors>
 		<Description>
-			A simple captcha generator and validator for Persians.
-			This package generate a string which represenet a 4 digit numbers in words.
+			A simple captcha generator.
+			This package generate a string which represenet a 6 characters (by default) alphanumeric.
 			User should send the exact match as number to validate himself as a non-robotic user
 		</Description>
 		<Copyright>© 2022 Alireza Mortezaei &lt;alireza_mortezaei@hotmail.com&gt;</Copyright>
 		<PackageProjectUrl>https://github.com/alireza91/Catchup</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/alireza91/Catchup.git</RepositoryUrl>
-		<PackageTags>Asp.net Core; C#; Captcha; Persian;</PackageTags>
+		<PackageTags>Asp.net Core; C#; Captcha;</PackageTags>
 		<PackageReleaseNotes>Please feel free to contribute</PackageReleaseNotes>
-		<Version>1.3.0</Version>
+		<Version>2.0.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
