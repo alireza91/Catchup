@@ -16,6 +16,17 @@ public class Catchupper : ICatchup
 
 	#region [Public method(s)]
 
+	/// <summary>
+	/// Generates a captcha image along with its corresponding text.
+	/// </summary>
+	/// <param name="options">
+	/// Optional configuration for captcha generation (length, colors, noise, etc.). 
+	/// If null, default options will be used.
+	/// </param>
+	/// <returns>
+	/// A <see cref="ByteArrayResultModel"/> containing the generated captcha image (as a byte array) 
+	/// and the captcha text.
+	/// </returns>
 	public ByteArrayResultModel GetAnImageCaptcha(CaptchaOptions? options = null)
 	{
 		var effectiveOptions = options ?? new CaptchaOptions();
@@ -30,6 +41,14 @@ public class Catchupper : ICatchup
 		};
 	}
 
+	/// <summary>
+	/// Validates whether the provided solution matches the given captcha riddle.
+	/// </summary>
+	/// <param name="riddle">The original captcha text that was generated.</param>
+	/// <param name="solution">The user-provided input to validate against the captcha.</param>
+	/// <returns>
+	/// True if the solution matches the riddle (case-insensitive, trimmed); otherwise, false.
+	/// </returns>
 	public bool CheckCaptcha(string riddle, string solution)
 	{
 		if (string.IsNullOrWhiteSpace(riddle) || string.IsNullOrWhiteSpace(solution))
